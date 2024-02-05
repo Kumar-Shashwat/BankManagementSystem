@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 800px; /* Maximum width of the card */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center the text within the card */
+        }
+
+        .card h2 {
+            color: #333; /* Ensure heading color is visible */
+        }
+
+        .customer-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .customer-table th, .customer-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .customer-table th {
+            background-color: #f2f2f2;
+        }
+
+        .edit-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .edit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Customer Management</h2>
+
+        <table class="customer-table">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>SSN ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Contact Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>123-45-6789</td>
+                    <td>Haiqua Naaz</td>
+                    <td>haiqua.naaz@tcs.com</td>
+                    <td>Kolkata</td>
+                    <td>8796858583</td>
+                    <td><button class="edit-button" onclick="editCustomer(1)">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>234-56-7890</td>
+                    <td>Kumar Shashwant</td>
+                    <td>kumar.shash@tcs.com</td>
+                    <td>Kolkata</td>
+                    <td>9458396938</td>
+                    <td><button class="edit-button" onclick="editCustomer(2)">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>345-67-8901</td>
+                    <td>Priyanshu</td>
+                    <td>priyanshu1@tcs.com</td>
+                    <td>Kolkata</td>
+                    <td>7859473456</td>
+                    <td><button class="edit-button" onclick="editCustomer(3)">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form id="customerEditForm" style="display: none;">
+            <!-- Edit form fields go here -->
+            <button type="button" onclick="cancelEdit()">Cancel</button>
+            <button type="submit">Save Changes</button>
+        </form>
+
+        <div id="acknowledgment" class="acknowledgment">
+            <!-- Acknowledgment messages go here -->
+        </div>
+    </div>
+
+    <script>
+        function editCustomer(customerId) {
+            // Set the form fields based on the selected customer's details
+            document.getElementById('customerId').value = customerId;
+            document.getElementById('ssnId').value = getSSNById(customerId); // Replace with your logic
+            document.getElementById('customerName').value = getCustomerNameById(customerId); // Replace with your logic
+            document.getElementById('email').value = getEmailById(customerId); // Replace with your logic
+            document.getElementById('address').value = getAddressById(customerId); // Replace with your logic
+            document.getElementById('contactNumber').value = getContactNumberById(customerId); // Replace with your logic
+
+            document.getElementById('customerTable').style.display = 'none';
+            document.getElementById('customerEditForm').style.display = 'block';
+        }
+
+        function cancelEdit() {
+            document.getElementById('customerTable').style.display = 'block';
+            document.getElementById('customerEditForm').style.display = 'none';
+        }
+
+        document.getElementById('customerEditForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Perform the update logic here
+
+            // Display acknowledgment or error
+            document.getElementById('acknowledgment').innerHTML = '<p class="success-message">Customer information updated successfully.</p>';
+            document.getElementById('acknowledgment').style.display = 'block';
+        });
+
+        // Replace the following functions with your actual data retrieval logic
+        function getSSNById(customerId) {
+            return "123-45-6789";
+        }
+
+        function getCustomerNameById(customerId) {
+            switch (customerId) {
+                case 1:
+                    return "Haiqua Naaz";
+                case 2:
+                    return "Kumar Shashwant";
+                case 3:
+                    return "Priyanshu";
+                default:
+                    return "";
+            }
+        }
+
+        function getEmailById(customerId) {
+            switch (customerId) {
+                case 1:
+                    return "haiqua.naaz@tcs.com";
+                case 2:
+                    return "kumar.shash@tcs.com";
+                case 3:
+                    return "priyanshu1@tcs.com";
+                default:
+                    return "";
+            }
+        }
+
+        function getAddressById(customerId) {
+            switch (customerId) {
+                case 1:
+                    return "Kolkata";
+                case 2:
+                    return "Kolkata";
+                case 3:
+                    return "Kolkata";
+                default:
+                    return "";
+            }
+        }
+
+        function getContactNumberById(customerId) {
+            switch (customerId) {
+                case 1:
+                    return "8796858583";
+                case 2:
+                    return "9458396938";
+                case 3:
+                    return "7859473456";
+                default:
+                    return "";
+            }
+        }
+    </script>
+</body>
+</html>

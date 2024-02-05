@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+        .card h2 {
+            text-align: center;
+            margin: 0 auto;
+            color: #333;
+        }
+
+        form {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea,
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .gender-options,
+        .marital-status-options {
+            display: flex;
+            margin-top: 5px;
+        }
+
+        .gender-options label,
+        .marital-status-options label {
+            margin-right: 10px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .acknowledgment {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .acknowledgment p {
+            margin: 5px 0;
+        }
+
+        .heading {
+            text-align: center;
+            /* margin-top: 20px; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Responsive adjustments */
+        @media only screen and (max-width: 600px) {
+            .card {
+                width: 90%;
+            }
+
+            .card h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="heading">
+            <h2>Customer Registration</h2>
+        </div>
+        <form id="customerRegistrationForm">
+            <label for="ssnId">Customer SSN ID:</label>
+            <input type="text" id="ssnId" placeholder="Enter SSN ID" maxlength="9" required>
+
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" placeholder="Enter Customer Name" maxlength="100" required>
+
+            <label for="accountNumber">Account Number:</label>
+            <input type="text" id="accountNumber" placeholder="Enter Account Number" maxlength="20" required>
+
+            <label for="ifscCode">IFSC Code:</label>
+            <input type="text" id="ifscCode" placeholder="Enter IFSC Code" maxlength="11" required>
+
+            <label for="accountBalance">Account Balance:</label>
+            <input type="text" id="accountBalance" placeholder="Enter Account Balance" required>
+
+            <label for="aadharCard">Aadhar Card No.:</label>
+            <input type="text" id="aadharCard" placeholder="Enter Aadhar Card No." maxlength="12" required>
+
+            <label for="panCard">Pan Card No.:</label>
+            <input type="text" id="panCard" placeholder="Enter Pan Card No." maxlength="10" required>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required>
+
+            <label>Gender:</label>
+            <div class="gender-options">
+                <label><input type="radio" name="gender" value="male" required> Male</label>
+                <label><input type="radio" name="gender" value="female" required> Female</label>
+                <label><input type="radio" name="gender" value="other" required> Other</label>
+            </div>
+
+            <label>Marital Status:</label>
+            <div class="marital-status-options">
+                <label><input type="radio" name="maritalStatus" value="single" required> Single</label>
+                <label><input type="radio" name="maritalStatus" value="married" required> Married</label>
+                <label><input type="radio" name="maritalStatus" value="divorced" required> Divorced</label>
+            </div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter Email" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" placeholder="Enter Address" maxlength="100" required></textarea>
+
+            <label for="contactNumber">Contact Number:</label>
+            <input type="text" id="contactNumber" placeholder="Enter Contact Number" maxlength="10" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <div id="acknowledgment" class="acknowledgment">
+            <h2 class="success-message">Customer Registration Successful</h2>
+            <p id="acknowledgmentDetails"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('customerRegistrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Generate a random 7-digit Customer ID
+            var customerId = Math.floor(1000000 + Math.random() * 9000000);
+
+            // Get form values
+            var ssnId = document.getElementById('ssnId').value;
+            var customerName = document.getElementById('customerName').value;
+            var accountNumber = document.getElementById('accountNumber').value;
+            var ifscCode = document.getElementById('ifscCode').value;
+            var accountBalance = document.getElementById('accountBalance').value;
+            var aadharCard = document.getElementById('aadharCard').value;
+            var panCard = document.getElementById('panCard').value;
+            var dob = document.getElementById('dob').value;
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+            var maritalStatus = document.querySelector('input[name="maritalStatus"]:checked').value;
+            var email = document.getElementById('email').value;
+            var address = document.getElementById('address').value;
+            var contactNumber = document.getElementById('contactNumber').value;
+
+            // Display acknowledgment
+            document.getElementById('acknowledgmentDetails').innerHTML = `
+                <strong>Customer ID:</strong> ${customerId}<br>
+                <strong>SSN ID:</strong> ${ssnId}<br>
+                <strong>Name:</strong> ${customerName}<br>
+                <strong>Account Number:</strong> ${accountNumber}<br>
+                <strong>IFSC Code:</strong> ${ifscCode}<br>
+                <strong>Account Balance:</strong> ${accountBalance}<br>
+                <strong>Aadhar Card No.:</strong> ${aadharCard}<br>
+                <strong>Pan Card No.:</strong> ${panCard}<br>
+                <strong>Date of Birth:</strong> ${dob}<br>
+                <strong>Gender:</strong> ${gender}<br>
+                <strong>Marital Status:</strong> ${maritalStatus}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Address:</strong> ${address}<br>
+                <strong>Contact Number:</strong> ${contactNumber}<br>
+            `;
+
+            document.getElementById('customerRegistrationForm').reset();
+            document.getElementById('customerRegistrationForm').style.display = 'none';
+            document.getElementById('acknowledgment').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
