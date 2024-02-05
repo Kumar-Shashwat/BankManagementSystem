@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .acknowledgment {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .acknowledgment p {
+            margin: 5px 0;
+        }
+
+
+        /* Addding some more info form my side. */
+
+        .notLoginOrRegister{
+            height: 3rem;
+            width: 100%;
+            padding: 8px;
+            margin-top: 2rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(212, 212, 212);
+
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Login</h2>
+        <form id="EmployeeLoginForm">
+            
+
+            <label for="employeeID">employeeID</label>
+            <input type="text" id="employeeID" maxlength="10" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" maxlength="30" required>
+
+            <!-- <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" maxlength="30" required> -->
+
+            <!-- <label for="address">Address:</label>
+            <textarea id="address" maxlength="100" required></textarea> -->
+
+            <!-- <label for="contactNumber">Contact Number:</label>
+            <input type="text" id="contactNumber" maxlength="10" required> -->
+
+            <button type="submit">Login</button>
+
+            <div class = "notLoginOrRegister">
+                <p>Don't have a account? <a href=" ILP.html"> Register now!</a></p>
+            </div>
+
+
+        </form>
+
+        <div id="acknowledgment" class="acknowledgment">
+            <h2 class="success-message">Employee Login Successful</h2>
+            <p><strong>Employee ID:</strong> <span id="ackEmployeeID"></span></p>
+            <!-- <p><strong>Name:</strong> <span id="ackName"></span></p> -->
+            <p><strong>Email:</strong> <span id="ackEmail"></span></p>
+        </div>
+
+        
+    </div>
+
+    <script>
+        document.getElementById('EmployeeLoginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Generate a random 7-digit Employee ID
+            // var employeeID = Math.floor(1000000 + Math.random() * 9000000);
+
+            // Get form values
+            // var firstName = document.getElementById('firstName').value;
+            var employeeID = document.getElementById('employeeID').value;
+            var email = document.getElementById('email').value;
+            // var password = document.getElementById('password').value;
+            // var confirmPassword = document.getElementById('confirmPassword').value;
+            // var address = document.getElementById('address').value;
+            // var contactNumber = document.getElementById('contactNumber').value;
+
+            // Check if passwords match
+            // if (password !== confirmPassword) {
+            //     alert('Passwords do not match');
+            //     return;
+            // }
+
+            // Display acknowledgment
+            document.getElementById('ackEmployeeID').textContent = employeeID;
+            // document.getElementById('ackName').textContent = firstName + ' ' + lastName;
+            document.getElementById('ackEmail').textContent = email;
+
+            document.getElementById('EmployeeLoginForm').reset();
+            document.getElementById('EmployeeLoginForm').style.display = 'none';
+            document.getElementById('acknowledgment').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
